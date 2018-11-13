@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dk.souldriven.priority.iml" filepath="$PROJECT_DIR$/.idea/modules/dk.souldriven.priority.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dk.souldriven.priority_main.iml" filepath="$PROJECT_DIR$/.idea/modules/dk.souldriven.priority_main.iml" group="dk.souldriven.priority" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dk.souldriven.priority_test.iml" filepath="$PROJECT_DIR$/.idea/modules/dk.souldriven.priority_test.iml" group="dk.souldriven.priority" />
+    </modules>
+  </component>
+</project>
