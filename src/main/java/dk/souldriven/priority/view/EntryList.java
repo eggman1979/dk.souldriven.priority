@@ -5,10 +5,9 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
-public class CreateEntryView extends JPanel{
+public class EntryList extends JPanel{
 	
-	
-	public CreateEntryView(){
+	public EntryList() {
 	
 	}
 }
