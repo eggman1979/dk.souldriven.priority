@@ -16,7 +16,8 @@ public class EntryView extends JPanel{
 	
 	public EntryView() {
 		Border border = getBorder();
-		Border margin = new EmptyBorder(10,15,10,10);
+		Border margin = new EmptyBorder(0,10
+				,5,10);
 		setBorder(new CompoundBorder(border, margin));
 		entryList = new JList(names);
 		entryList.setFixedCellHeight(30);
