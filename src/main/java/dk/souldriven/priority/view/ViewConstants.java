@@ -15,7 +15,7 @@ public class ViewConstants {
     public static Dimension MIN_SCREEN = new Dimension(MIN_WIDTH, MIN_HEIGHT);
     
     //LeftPanelView
-	public static int MIN_HEIGHT_LEFT = MIN_HEIGHT/4;
+	public static int MIN_HEIGHT_LEFT = MIN_HEIGHT/2;
 	public static int MIN_WIDTH_LEFT = 250;
 	
 	public static Dimension MIN_LEFT_PANEL = new Dimension(MIN_WIDTH_LEFT, MIN_HEIGHT_LEFT);

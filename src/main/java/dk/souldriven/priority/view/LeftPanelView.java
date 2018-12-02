@@ -10,7 +10,6 @@ public class LeftPanelView extends JPanel {
 	private PriorityList list;
 	private EntryView todo, done;
 	private JButton createBtn;
-	JPanel panel = new JPanel();
 	JLabel todoLabel, doneLabel;
 	
 	public LeftPanelView(PriorityList list, EntryView todo, EntryView done) {
@@ -19,17 +18,20 @@ public class LeftPanelView extends JPanel {
 		this.done = done;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setMinimumSize(ViewConstants.MIN_LEFT_PANEL);
-		
+		this.setBackground(ViewUtilities.BACKGROUND_BLUE);
+		ViewUtilities.createRightBorder(this);
 		todoLabel = new JLabel("TODO-LIST");
+		todoLabel.setForeground(Color.WHITE);
 		doneLabel = new JLabel("DONE-LIST");
+		doneLabel.setForeground(Color.WHITE);
 		//TODO lav listener til denne button
 		createBtn = new JButton("Create Entry");
-		createBtn.setMinimumSize(new Dimension(250,30));
-		createBtn.setMaximumSize(new Dimension(250, 30));
+		createBtn.setMinimumSize(new Dimension(200,30));
+		createBtn.setMaximumSize(new Dimension(200, 30));
 		createBtn.setAlignmentX(0.5f);
 		todoLabel.setAlignmentX(0.5f);
 		doneLabel.setAlignmentX(0.5f);
-		setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+//		setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
 
 	
 		add(todoLabel);
@@ -39,5 +41,10 @@ public class LeftPanelView extends JPanel {
 		add(Box.createVerticalStrut(8));
 		add(doneLabel);
 		add(done);
+
+	}
+	
+	public JButton getCreateBtn(){
+		return createBtn;
 	}
 }
