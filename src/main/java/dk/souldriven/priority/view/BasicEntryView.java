@@ -9,7 +9,18 @@ import static dk.souldriven.priority.entities.PriorityEnum.*;
 import static javax.swing.BoxLayout.X_AXIS;
 
 public abstract class BasicEntryView extends JPanel{
-
+	
+	public JTextField getTitleTextField() {
+		return titleTextField;
+	}
+	
+	public JLabel getDescriptionLabel() {
+		return descriptionLabel;
+	}
+	
+	public JComboBox<String> getPriorityDropdown() {
+		return priorityDropdown;
+	}
 	
 	protected Component firstTopPanelRigidArea = Box.createRigidArea(new Dimension(55,0));
 	protected Dimension size;
@@ -62,9 +73,9 @@ public abstract class BasicEntryView extends JPanel{
 		pane.setMinimumSize((descriptionTextArea.getMinimumSize()));
 		pane.createVerticalScrollBar();
 		middlePanel.add(pane);
-		Component box = Box.createRigidArea(new Dimension(240, 30));
+		Component box = Box.createRigidArea(new Dimension(100, 30));
 		box.setMinimumSize(new Dimension(1, 0));
-		box.setMaximumSize(new Dimension(240, 30));
+		box.setMaximumSize(new Dimension(100, 30));
 		middlePanel.add(box);
 		middlePanel.setBackground(ViewUtilities.BACKGROUND_BLUE);
 		add(middlePanel);

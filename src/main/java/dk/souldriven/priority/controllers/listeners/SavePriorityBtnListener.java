@@ -1,5 +1,6 @@
-package dk.souldriven.priority.controllers;
+package dk.souldriven.priority.controllers.listeners;
 
+import dk.souldriven.priority.controllers.MainViewController;
 import dk.souldriven.priority.entities.Entry;
 import dk.souldriven.priority.entities.PriorityList;
 import dk.souldriven.priority.view.CreateEntryView;

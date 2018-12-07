@@ -1,14 +1,14 @@
 package dk.souldriven.priority.controllers;
 
 import dk.souldriven.priority.controllers.listeners.CreateButtonListener;
+import dk.souldriven.priority.controllers.listeners.EditAndSaveListener;
 import dk.souldriven.priority.controllers.listeners.EntryListSelectListener;
+import dk.souldriven.priority.controllers.listeners.SavePriorityBtnListener;
 import dk.souldriven.priority.entities.Entry;
 import dk.souldriven.priority.entities.PriorityList;
 import dk.souldriven.priority.view.*;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 
 /**
@@ -68,10 +68,13 @@ public class MainViewController {
 	}
 	
 	public void viewEntry(int selectedIndex) {
+		if(selectedIndex == -1) {
+			selectedIndex = 0;
+		}
 		Entry entry = list.getTodoList().get(selectedIndex);
 		ShowEntryView entryView = new ShowEntryView(entry, view.getSize());
 		//Set Listeners here
-		entryView.getSaveChangesBtn().addActionListener(new EditAndSaveListener(entry, entryView));
+		entryView.getSaveChangesBtn().addActionListener(new EditAndSaveListener(entry, entryView, todo));
 		view.setCenter(entryView);
 	}
 	
