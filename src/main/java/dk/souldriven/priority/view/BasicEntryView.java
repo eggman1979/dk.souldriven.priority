@@ -7,6 +7,7 @@ import java.awt.*;
 
 import static dk.souldriven.priority.entities.PriorityEnum.*;
 import static javax.swing.BoxLayout.X_AXIS;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 
 public abstract class BasicEntryView extends JPanel{
 	
@@ -115,10 +116,11 @@ public abstract class BasicEntryView extends JPanel{
 		topPanel.validate();
 		topPanel.repaint();
 		add(topPanel);
-		
 	}
 	
-	public void refresh() {
+	
+	
+	protected void refresh() {
 		removeAll();
 		add(Box.createRigidArea(new Dimension(0, 200)));
 		topPanel = new JPanel();
@@ -136,4 +138,8 @@ public abstract class BasicEntryView extends JPanel{
 	public String getTitleText() { return titleTextField.getText();	}
 	public PriorityEnum getPriority() {return PriorityEnum.valueOf(((String) priorityDropdown.getSelectedItem()).toUpperCase());}
 	public String getDescription() {return descriptionTextArea.getText();}
+	
+	public void showError(String errorMsg){
+		JOptionPane.showMessageDialog(this, errorMsg);
+	}
 }

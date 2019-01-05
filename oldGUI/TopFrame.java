@@ -32,17 +32,13 @@ public class TopFrame extends JFrame {
 		if(centerView instanceof CreateEntryView){
 			getContentPane().remove(createView);
 			createView = centerView;
-			
 		}
 		else if( centerView instanceof EntryView){
 			getContentPane().remove(entryView);
 			entryView =  centerView;
 		}
-		
-	
 		invalidate();
 		getContentPane().add(centerView, BorderLayout.CENTER);
-		
 		validate();
 		pack();
 	}

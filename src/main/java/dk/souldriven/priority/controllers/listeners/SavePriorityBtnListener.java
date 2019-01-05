@@ -3,6 +3,7 @@ package dk.souldriven.priority.controllers.listeners;
 import dk.souldriven.priority.controllers.MainViewController;
 import dk.souldriven.priority.entities.Entry;
 import dk.souldriven.priority.entities.PriorityList;
+import dk.souldriven.priority.view.BasicEntryView;
 import dk.souldriven.priority.view.CreateEntryView;
 
 
@@ -21,12 +22,14 @@ public class SavePriorityBtnListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		CreateEntryView createView = mainController.getCreateEntryView();
-		Entry entry = new Entry(createView.getTitleText(), createView.getDescription(), 0, null, createView.getPriority());
-		list.addTodoList(entry);
-		//mainController.createEntryView.getCreateButton().setVisible(false);
-		createView.removeAll();
-		mainController.clearCenter();
-		
+		CreateEntryView createView = (CreateEntryView)mainController.getCreateEntryView();
+		if(createView.getTitleText().isEmpty()){
+			createView.showError("Priority must have a title");
+		}
+		else {
+			Entry entry = list.createTodo(createView.getTitleText(), createView.getDescription(), 0, createView.getPriority());
+			createView.removeAll();
+			mainController.clearCenter();
+		}
 	}
 }

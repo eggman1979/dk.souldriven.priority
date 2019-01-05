@@ -4,7 +4,6 @@ import dk.souldriven.priority.controllers.listeners.ListSelectListener;
 import dk.souldriven.priority.view.EntryListPanel;
 import dk.souldriven.priority.view.ListView;
 import dk.souldriven.priority.view.TodoListPanel;
-import sun.applet.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

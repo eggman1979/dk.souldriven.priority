@@ -1,5 +1,6 @@
 package dk.souldriven.priority.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Entry {
@@ -9,15 +10,18 @@ public class Entry {
 	private int estimatedTime;
 	private List<Entry> dependencies;
 	private PriorityEnum priorityEnum;
+	private boolean isClosed = false;
+	private boolean isSubtask = false;
 	
 	public Entry(){			}
 	
-	public Entry(String name, String description, int estimatedTime, List<Entry> dependencies, PriorityEnum priorityEnum){
+	public Entry(String name, String description, int estimatedTime, PriorityEnum priorityEnum){
 		this.name = name;
 		this.description = description;
 		this.estimatedTime = estimatedTime;
-		this.dependencies = dependencies;
 		this.priorityEnum = priorityEnum;
+		dependencies = new ArrayList<>();
+		
 		calculateEstimatedPriority();
 		
 	}
@@ -71,5 +75,21 @@ public class Entry {
 	}
 	
 	private void calculateEstimatedPriority() {
+	}
+	
+	public boolean getIsClosed() {
+		return isClosed;
+	}
+	
+	public void setIsClosed(boolean isDone){
+		this.isClosed = isDone;
+	}
+	
+	public void setIsSubtask(boolean isSubtask) {
+		this.isSubtask = isSubtask;
+	}
+	
+	public boolean isSubtask() {
+		return isSubtask;
 	}
 }

@@ -20,11 +20,21 @@ public class LeftPanelView extends JPanel {
 		this.setMinimumSize(ViewConstants.MIN_LEFT_PANEL);
 		this.setBackground(ViewUtilities.BACKGROUND_BLUE);
 		ViewUtilities.createRightBorder(this);
-		todoLabel = new JLabel("TODO-LIST");
+		todoLabel = new JLabel("TODO-LIST",SwingConstants.CENTER);
+		todoLabel.setOpaque(true);
+		todoLabel.setBackground(Color.BLUE);
 		todoLabel.setForeground(Color.WHITE);
-		doneLabel = new JLabel("DONE-LIST");
+		todoLabel.setBackground(Color.BLUE);
+		todoLabel.setForeground(Color.WHITE);
+		todoLabel.setPreferredSize(new Dimension(200,30));
+		todoLabel.setMaximumSize(new Dimension(250,30));
+		
+		doneLabel = new JLabel("DONE-LIST", SwingConstants.CENTER);
+		doneLabel.setOpaque(true);
+		doneLabel.setBackground(Color.BLUE);
 		doneLabel.setForeground(Color.WHITE);
-		//TODO lav listener til denne button
+		doneLabel.setPreferredSize(new Dimension(200,30));
+		doneLabel.setMaximumSize(new Dimension(250,30));
 		createBtn = new JButton("Create Entry");
 		createBtn.setMinimumSize(new Dimension(200,30));
 		createBtn.setMaximumSize(new Dimension(200, 30));

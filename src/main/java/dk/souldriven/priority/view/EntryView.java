@@ -1,5 +1,6 @@
 package dk.souldriven.priority.view;
 
+import dk.souldriven.priority.controllers.listeners.ListFocusListener;
 import dk.souldriven.priority.entities.Entry;
 import dk.souldriven.priority.controllers.listeners.ListCellRenderer;
 import javax.swing.*;
@@ -14,46 +15,18 @@ public class EntryView extends JPanel implements Runnable {
 	JScrollPane scrollPane;
 	List<Entry> todo;
 	
-	public ListSelectionModel getSelectModel() {
-		return selectModel;
-	}
-	
-	public EntryView(List<Entry> todo) {
+	public EntryView(List<Entry> todo, String name) {
 		setPreferredSize(new Dimension(ViewConstants.MIN_WIDTH_LEFT, (ViewConstants.MIN_HEIGHT/3)-100));
 		this.todo = todo;
 		setOpaque(false);
 		entryList = new JList<>();
-		run();
+		entryList.setName(name);
+		entryList.addFocusListener(new ListFocusListener(entryList));
+		ListCellRenderer cellRenderer = new ListCellRenderer();
+		entryList.setCellRenderer(cellRenderer);
+	
 		setBackground(ViewUtilities.BACKGROUND_BLUE);
-		selectModel = entryList.getSelectionModel();
-	}
-	
-	
-	
-	public JList<String> getEntryList() {
-		return entryList;
-	}
-	
-	public void setSelectedEvent(int selectedEvent) {
-		this.selectedEvent = selectedEvent;
-	}
-	
-	public int getSelectedEvent() {
-		
-		return selectedEvent;
-	}
-	
-	@Override
-	public void run() {
-		
-		
-		super.removeAll();
-		
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		for (Entry entry : todo) {
-			listModel.addElement(entry.getName());
-		}
-		entryList.setModel(listModel);
+		entryList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		entryList.setAlignmentX(0.5f);
 		entryList.setFixedCellHeight(30);
 		entryList.setOpaque(true);
@@ -64,16 +37,26 @@ public class EntryView extends JPanel implements Runnable {
 		scrollPane.setBorder(null);
 		scrollPane.setOpaque(true);
 		entryList.setFixedCellHeight(30);
-		ListCellRenderer cellRenderer = new ListCellRenderer();
-		entryList.setCellRenderer(cellRenderer);
 		super.add(scrollPane);
-		
-		
-		
-		
-		
-		
-		
 	
+	}
+	
+	@Override
+	public void run() {
+		super.removeAll();
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		for (Entry entry : todo) {
+			System.out.println("running run(), there are " +todo.size() + " entries");
+			listModel.addElement(entry.getName());
+		}
+		entryList.setModel(listModel);
+		super.add(scrollPane);
+		entryList.repaint();
+		scrollPane.repaint();
+		
+	}
+	
+	public JList<String> getEntryList() {
+		return entryList;
 	}
 }

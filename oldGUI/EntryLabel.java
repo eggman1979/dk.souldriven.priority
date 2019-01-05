@@ -10,7 +10,6 @@ public class EntryLabel extends JLabel {
 	
 	Entry entry;
 	public  EntryLabel(String name){super(name);
-	
 	}
 	
 	public EntryLabel(Entry entry) {

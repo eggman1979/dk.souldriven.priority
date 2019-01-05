@@ -24,20 +24,29 @@ public class CreateEntryView extends BasicEntryView {
 	
 	private JButton createButton;
 	
+	public JButton getCreateSubtask() {
+		return createSubtask;
+	}
+	
+	private JButton createSubtask;
+	
 	
 	public CreateEntryView(Dimension size) {
 		super(size);
         createButton = new JButton("Create priority");
+        createSubtask = new JButton("Add Subtask");
 		refresh();
 	}
 	
 	@Override
 	protected void createBottomPanel() {
 		super.createBottomPanel();
-		createButton = new JButton("Create priority");
 		createButton.setAlignmentX(0.75f);
+		createSubtask.setAlignmentX(0.75f);
 		bottomPanel.add(Box.createHorizontalGlue());
 		bottomPanel.add(Box.createHorizontalGlue());
+		bottomPanel.add(createSubtask);
+		bottomPanel.add(Box.createRigidArea(new Dimension(25, 0)));
 		bottomPanel.add(createButton);
 		bottomPanel.add(Box.createHorizontalGlue());
 		bottomPanel.validate();

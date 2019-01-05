@@ -19,18 +19,8 @@ public class EntryListSelectListener implements ListSelectionListener {
 	}
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		System.out.println(list.getSelectedIndex());
-	    mainViewController.viewEntry(list.getSelectedIndex());
+		System.out.println(" ***** " +list.getSelectedIndex());
+	    mainViewController.viewEntry(list.getSelectedIndex(), list.getName());
+	    
 	}
-
-//	JList jList;
-//	MainController mainController;
-//	public ListSelectListener(JList jList, MainController mainController){
-//		this.jList = jList;
-//		this.mainController = mainController;
-//	}
-//	@Override
-//	public void valueChanged(ListSelectionEvent e) {
-//		mainController.viewEntry(jList.getSelectedIndex());
-//	}
 }

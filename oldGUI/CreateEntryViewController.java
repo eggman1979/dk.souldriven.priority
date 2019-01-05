@@ -3,8 +3,6 @@ package dk.souldriven.priority.controllers;
 import dk.souldriven.priority.entities.Entry;
 import dk.souldriven.priority.view.CreateEntryView;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class CreateEntryViewController {
@@ -31,10 +29,8 @@ public class CreateEntryViewController {
 		
 		priorityDropdown = createEntryView.getPriorityDropdown();
 		priorityDropdown.addActionListener(e -> {
-			priorityDropdown.setVisible(true);
 		             createEntryView.validate();
 		             createEntryView.repaint();
-		             mainController.getView().pack();
 		}) ;
 		
 		
