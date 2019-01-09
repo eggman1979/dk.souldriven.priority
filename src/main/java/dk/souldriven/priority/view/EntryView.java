@@ -46,7 +46,7 @@ public class EntryView extends JPanel implements Runnable {
 		super.removeAll();
 		DefaultListModel<String> listModel = new DefaultListModel<>();
 		for (Entry entry : todo) {
-			System.out.println("running run(), there are " +todo.size() + " entries");
+			System.out.println("running run(), there are " +todo.size() + " entries in " + getName() );
 			listModel.addElement(entry.getName());
 		}
 		entryList.setModel(listModel);

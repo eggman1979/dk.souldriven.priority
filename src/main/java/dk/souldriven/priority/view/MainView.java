@@ -2,13 +2,14 @@ package dk.souldriven.priority.view;
 
 
 import javax.swing.*;
+import javax.swing.text.View;
 import java.awt.*;
 
 public class MainView extends JFrame {
 	
 	final String title = "Souldriven's Priority List";
 	
-	JPanel left, center;
+	JPanel left, center, right;
 	
 	public MainView() {
 		
@@ -39,5 +40,11 @@ public class MainView extends JFrame {
 		center.setBackground(ViewUtilities.BACKGROUND_BLUE);
 		validate();
 		pack();
+	}
+	
+	public void setRight(JPanel right) {
+		this.right = right;
+		getContentPane().add(right, BorderLayout.LINE_END);
+		left.setBackground(ViewUtilities.BACKGROUND_BLUE);
 	}
 }

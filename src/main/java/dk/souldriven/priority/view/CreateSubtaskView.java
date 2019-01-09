@@ -22,10 +22,10 @@ public class CreateSubtaskView extends BasicEntryView {
 		titlePanel.setMaximumSize(new Dimension(1500, 30));
 		titlePanel.setBackground(ViewUtilities.BACKGROUND_BLUE);
 		titlePanel.setAlignmentX(LEFT_ALIGNMENT);
-		label = new JLabel("Subtask of " + newEntry.getName(),JLabel.LEFT);
+		label = new JLabel("Parent priority: " + newEntry.getName(),JLabel.LEFT);
+		Font font = new Font(null, Font.PLAIN, 15);
+		label.setFont(font);
 		label.setAlignmentX(LEFT_ALIGNMENT);
-		System.out.println(titlePanel.getLayout());
-		
 		label.setForeground(Color.WHITE);
 		titlePanel.add(label);
 		titlePanel.add(Box.createHorizontalGlue());
@@ -36,6 +36,13 @@ public class CreateSubtaskView extends BasicEntryView {
 	public void createBottomPanel() {
 		super.createBottomPanel();
 		createButton = new JButton("Create subtask");
+		createButton.setAlignmentX(0.75f);
+		bottomPanel.add(Box.createHorizontalGlue());
+		bottomPanel.add(Box.createHorizontalGlue());
+		bottomPanel.add(Box.createRigidArea(new Dimension(25, 0)));
+		bottomPanel.add(createButton);
+		bottomPanel.add(Box.createHorizontalGlue());
+		
 	}
 	
 	@Override
@@ -52,8 +59,6 @@ public class CreateSubtaskView extends BasicEntryView {
 		bottomPanel = new JPanel();
 		createBottomPanel();
 		setVisible(true);
-		
-		
 	}
 	
 	public JButton getCreateButton() {

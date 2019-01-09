@@ -1,8 +1,11 @@
 package dk.souldriven.priority.view;
 
 import dk.souldriven.priority.entities.Entry;
+
 import javax.swing.*;
 import java.awt.*;
+
+import static javax.swing.BoxLayout.X_AXIS;
 
 public class ShowEntryView extends BasicEntryView {
 	
@@ -20,10 +23,30 @@ public class ShowEntryView extends BasicEntryView {
 	private JComboBox<String> priorityCloseBox;
 	private String[] priorityStates = {"Open", "Closed"};
 	private JLabel closeLabel, priorityCloseLabel;
+	private JPanel titlePanel;
 	
 	public ShowEntryView(Entry entry, Dimension size) {
 		super(size);
 		this.entry = entry;
+		titlePanel = new JPanel();
+		titlePanel.setLayout(new BoxLayout(titlePanel, X_AXIS));
+		titlePanel.setMinimumSize(new Dimension(800, 30));
+		titlePanel.setMaximumSize(new Dimension(1500, 30));
+		titlePanel.setBackground(ViewUtilities.BACKGROUND_BLUE);
+		titlePanel.setAlignmentX(LEFT_ALIGNMENT);
+		label = new JLabel("", JLabel.LEFT);
+		Font font = new Font(null, Font.PLAIN, 15);
+		label.setFont(font);
+		label.setAlignmentX(LEFT_ALIGNMENT);
+		label.setForeground(Color.WHITE);
+		titlePanel.add(label);
+		titlePanel.add(Box.createHorizontalGlue());
+		String parentText = "";
+		if (entry.getParenttask() != null) {
+			parentText = "Parent priority: " + entry.getName();
+		}
+		label.setText(parentText);
+		
 		refresh();
 	}
 	
@@ -54,11 +77,11 @@ public class ShowEntryView extends BasicEntryView {
 		
 		JPanel closeCheckBox = new JPanel();
 		closeCheckBox.setLayout(new BoxLayout(closeCheckBox, BoxLayout.Y_AXIS));
-		closeCheckBox.setMaximumSize(new Dimension(50,100));
-		closeCheckBox.setMinimumSize(new Dimension(100,100));
+		closeCheckBox.setMaximumSize(new Dimension(50, 100));
+		closeCheckBox.setMinimumSize(new Dimension(100, 100));
 		closeLabel = new JLabel("Is done?");
 		middlePanel.add(closeLabel);
-		middlePanel.add(Box.createRigidArea(new Dimension(5,0)));
+		middlePanel.add(Box.createRigidArea(new Dimension(5, 0)));
 		priorityLabel.setForeground(Color.WHITE);
 		middlePanel.add(Box.createRigidArea(new Dimension(5, 0)));
 		priorityCloseBox = new JComboBox(priorityStates);
@@ -79,7 +102,6 @@ public class ShowEntryView extends BasicEntryView {
 	protected void createBottomPanel() {
 		super.createBottomPanel();
 		saveChangesBtn = new JButton("Edit");
-		
 		saveChangesBtn.setAlignmentX(0.75f);
 		bottomPanel.add(Box.createHorizontalGlue());
 		bottomPanel.add(Box.createHorizontalGlue());
@@ -98,7 +120,7 @@ public class ShowEntryView extends BasicEntryView {
 	public void setIsEditMode(boolean editEnabled) {
 		this.isEditMode = editEnabled;
 	}
-
+	
 	
 	public void enableEditable() {
 		System.out.println("enable editable, edit mode on: " + isEditMode);
@@ -109,7 +131,6 @@ public class ShowEntryView extends BasicEntryView {
 		priorityCloseLabel.setVisible(false);
 		priorityCloseBox.setVisible(true);
 		saveChangesBtn.setText("Save");
-		
 	}
 	
 	public void disableEditable() {
@@ -121,6 +142,21 @@ public class ShowEntryView extends BasicEntryView {
 		priorityCloseLabel.setVisible(true);
 		priorityCloseBox.setVisible(false);
 		saveChangesBtn.setText("Edit");
+	}
 	
+	@Override
+	public void refresh() {
+		removeAll();
+		add(titlePanel);
+		add(Box.createRigidArea(new Dimension(0, 170)));
+		topPanel = new JPanel();
+		createTopPanel();
+		add(Box.createRigidArea(new Dimension(0, 30)));
+		middlePanel = new JPanel();
+		createMiddlePanel();
+		add(Box.createRigidArea(new Dimension(0, 30)));
+		bottomPanel = new JPanel();
+		createBottomPanel();
+		setVisible(true);
 	}
 }

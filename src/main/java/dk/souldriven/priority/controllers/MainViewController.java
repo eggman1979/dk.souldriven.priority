@@ -27,7 +27,7 @@ public class MainViewController {
 	
 	private MainView view;
 	private LeftPanelView leftView;
-	private EntryView todo, done;
+	private EntryView todo, done, subTasks;
 	
 	public MainViewController(PriorityList list) {
 		this.list = list;
@@ -46,6 +46,8 @@ public class MainViewController {
 	public void setLeftView(JPanel panel) {
 		view.setLeft(panel);
 	}
+	
+	public void setRightView(JPanel panel){ view.setRight(panel);}
 	
 	public void setCenterView(JPanel panel) {
 		view.setCenter(panel);
@@ -70,9 +72,10 @@ public class MainViewController {
 		if (selectedIndex == -1){
 			selectedIndex = 0;
 		}
+		Entry entry = null;
 		if (listName.equals("todo")) {
 			if (list.getTodoList().size() > 0) {
-				Entry entry = list.getTodoList().get(selectedIndex);
+				entry = list.getTodoList().get(selectedIndex);
 				ShowEntryView entryView = new ShowEntryView(entry, view.getSize());
 				//Set Listeners here
 				entryView.getSaveChangesBtn().addActionListener(new EditAndSaveListener(entry, entryView, todo, this));
@@ -80,12 +83,18 @@ public class MainViewController {
 			}
 		} else if (listName.equals("done")) {
 			if (list.getDoneList().size() > 0) {
-				Entry entry = list.getDoneList().get(selectedIndex);
+				entry = list.getDoneList().get(selectedIndex);
 				ShowEntryView entryView = new ShowEntryView(entry, view.getSize());
 				//Set Listeners here
 				entryView.getSaveChangesBtn().addActionListener(new EditAndSaveListener(entry, entryView, done, this));
 				view.setCenter(entryView);
 			}
+		}
+		if(entry != null){
+			subTasks = new EntryView(entry.getDependencies(), "Subtasks");
+			subTasks.run();
+			SubtaskPanelView subtaskPanel = new SubtaskPanelView(entry, subTasks);
+			setRightView(subtaskPanel);
 		}
 	}
 	

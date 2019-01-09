@@ -12,6 +12,8 @@ public class Entry {
 	private PriorityEnum priorityEnum;
 	private boolean isClosed = false;
 	private boolean isSubtask = false;
+	private Entry parentTask = null;
+	
 	
 	public Entry(){			}
 	
@@ -85,11 +87,11 @@ public class Entry {
 		this.isClosed = isDone;
 	}
 	
-	public void setIsSubtask(boolean isSubtask) {
-		this.isSubtask = isSubtask;
+	public void setParentTask(Entry parentTask) {
+		this.parentTask = parentTask;
 	}
 	
-	public boolean isSubtask() {
-		return isSubtask;
+	public Entry getParenttask() {
+		return parentTask;
 	}
 }

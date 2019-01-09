@@ -21,7 +21,7 @@ public class CreateSubtaskListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Entry subtask = mvc.getPriorityList().createTodo(subtaskView.getTitleText(), subtaskView.getDescription(), 0,  subtaskView.getPriority());
-		subtask.setIsSubtask(true);
+		subtask.setParentTask(newEntry);
 		newEntry.getDependencies().add(subtask);
 	}
 }
