@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Entry {
+	public static int idCounter = 0;
 	private String name;
+	private long id;
 	private String description;
 	private int estimatedPriority;
 	private int estimatedTime;
@@ -15,17 +17,18 @@ public class Entry {
 	private Entry parentTask = null;
 	
 	
-	public Entry(){			}
+	public Entry() { }
 	
-	public Entry(String name, String description, int estimatedTime, PriorityEnum priorityEnum){
+	public Entry(String name, String description, int estimatedTime, PriorityEnum priorityEnum) {
 		this.name = name;
+		id = idCounter;
+		idCounter++;
 		this.description = description;
 		this.estimatedTime = estimatedTime;
 		this.priorityEnum = priorityEnum;
 		dependencies = new ArrayList<>();
 		
 		calculateEstimatedPriority();
-		
 	}
 	
 	public String getName() {
@@ -83,7 +86,7 @@ public class Entry {
 		return isClosed;
 	}
 	
-	public void setIsClosed(boolean isDone){
+	public void setIsClosed(boolean isDone) {
 		this.isClosed = isDone;
 	}
 	
@@ -93,5 +96,20 @@ public class Entry {
 	
 	public Entry getParenttask() {
 		return parentTask;
+	}
+	
+	public long getId() {
+		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	@Override
+	public String toString(){
+		
+		String parentName = parentTask == null ?  "NULL" : parentTask.getName() ;
+		return id+","+name+","+description+","+ estimatedPriority+ ","+estimatedTime+","+priorityEnum.getName().toUpperCase()+","+ parentName;
 	}
 }

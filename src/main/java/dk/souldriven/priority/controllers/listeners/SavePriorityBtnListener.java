@@ -27,9 +27,9 @@ public class SavePriorityBtnListener implements ActionListener {
 			createView.showError("Priority must have a title");
 		}
 		else {
-			Entry entry = list.createTodo(createView.getTitleText(), createView.getDescription(), 0, createView.getPriority());
+			Entry entry = list.createTodo(createView.getTitleText(), createView.getDescription(), 0, createView.getPriority(), null);
 			createView.removeAll();
 			mainController.clearCenter();
-		}
+}
 	}
 }

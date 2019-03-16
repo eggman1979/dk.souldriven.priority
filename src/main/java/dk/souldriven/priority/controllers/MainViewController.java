@@ -6,6 +6,9 @@ import dk.souldriven.priority.entities.PriorityList;
 import dk.souldriven.priority.view.*;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 
 /**
@@ -16,6 +19,16 @@ public class MainViewController {
 	
 	PriorityList list;
 	CreateEntryView createEntryView;
+
+	public JList getFocusList() {
+		return focusList;
+	}
+
+	public void setFocusList(JList focusList) {
+		this.focusList = focusList;
+	}
+
+	private JList focusList = null;
 	
 	public MainView getView() {
 		return view;
@@ -33,21 +46,25 @@ public class MainViewController {
 		this.list = list;
 		view = new MainView();
 		todo = new EntryView(list.getTodoList(), "todo");
-		todo.getEntryList().addListSelectionListener(new EntryListSelectListener(todo.getEntryList(), this));
+		MouseListener entrySelectionListener = new EntryListSelectListener(this);
+		todo.getEntryList().addMouseListener(entrySelectionListener);
+		todo.getEntryList().addFocusListener(new ListFocusListener(todo.getEntryList(), this));
 		done = new EntryView(list.getDoneList(), "done");
-		done.getEntryList().addListSelectionListener(new EntryListSelectListener(done.getEntryList(), this));
+		done.getEntryList().addMouseListener(entrySelectionListener);
+		done.getEntryList().addFocusListener(new ListFocusListener(done.getEntryList(), this));
 		list.observers.add(todo);
 		list.observers.add(done);
 		leftView = new LeftPanelView(list, todo, done);
 		leftView.getCreateBtn().addActionListener(new CreateButtonListener(this));
 		setLeftView(leftView);
+		setRightView(new SubtaskPanelView());
 	}
 	
 	public void setLeftView(JPanel panel) {
 		view.setLeft(panel);
 	}
 	
-	public void setRightView(JPanel panel){ view.setRight(panel);}
+	public void setRightView(JPanel panel) { view.setRight(panel);}
 	
 	public void setCenterView(JPanel panel) {
 		view.setCenter(panel);
@@ -56,8 +73,9 @@ public class MainViewController {
 	public void openCreateView() {
 		createEntryView = new CreateEntryView(view.getSize());
 		createEntryView.getCreateButton().addActionListener(new SavePriorityBtnListener(list, this));
-		createEntryView.getCreateSubtask().addActionListener(new AddSubtaskListener(this));
+		createEntryView.getCreateSubtask().addActionListener(new AddSubtaskListener(this, createEntryView));
 		setCenterView(createEntryView);
+		setRightView(new SubtaskPanelView(new Entry(), new EntryView(new ArrayList<>(), "Subtask")));
 	}
 	
 	public BasicEntryView getCreateEntryView() {
@@ -69,33 +87,35 @@ public class MainViewController {
 	}
 	
 	public void viewEntry(int selectedIndex, String listName) {
-		if (selectedIndex == -1){
+		if (selectedIndex == -1) {
 			selectedIndex = 0;
 		}
 		Entry entry = null;
+		ShowEntryView entryView = null;
+		
 		if (listName.equals("todo")) {
 			if (list.getTodoList().size() > 0) {
 				entry = list.getTodoList().get(selectedIndex);
-				ShowEntryView entryView = new ShowEntryView(entry, view.getSize());
+				entryView = new ShowEntryView(entry, view.getSize());
 				//Set Listeners here
 				entryView.getSaveChangesBtn().addActionListener(new EditAndSaveListener(entry, entryView, todo, this));
-				view.setCenter(entryView);
+				entryView.getCreateSubtask().addActionListener(new AddSubtaskListener(this, entryView));
 			}
 		} else if (listName.equals("done")) {
 			if (list.getDoneList().size() > 0) {
 				entry = list.getDoneList().get(selectedIndex);
-				ShowEntryView entryView = new ShowEntryView(entry, view.getSize());
+				entryView = new ShowEntryView(entry, view.getSize());
 				//Set Listeners here
 				entryView.getSaveChangesBtn().addActionListener(new EditAndSaveListener(entry, entryView, done, this));
-				view.setCenter(entryView);
 			}
 		}
-		if(entry != null){
+		if (entry != null) {
 			subTasks = new EntryView(entry.getDependencies(), "Subtasks");
 			subTasks.run();
 			SubtaskPanelView subtaskPanel = new SubtaskPanelView(entry, subTasks);
 			setRightView(subtaskPanel);
 		}
+		view.setCenter(entryView);
 	}
 	
 	public PriorityList getPriorityList() {

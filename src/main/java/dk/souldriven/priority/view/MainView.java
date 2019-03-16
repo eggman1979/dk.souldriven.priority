@@ -9,7 +9,7 @@ public class MainView extends JFrame {
 	
 	final String title = "Souldriven's Priority List";
 	
-	JPanel left, center, right;
+	JPanel left, center, right ;
 	
 	public MainView() {
 		
@@ -18,6 +18,10 @@ public class MainView extends JFrame {
 		setMinimumSize(ViewConstants.MIN_SCREEN);
 		setPreferredSize(new Dimension(1900, 1000));
 		setMaximumSize(ViewConstants.FULL_SCREEN);
+		right = new JPanel(new CardLayout());
+		right.setBackground(ViewUtilities.BACKGROUND_BLUE);
+		ViewUtilities.createEmptyBorder(right);
+		getContentPane().add(right, BorderLayout.EAST);
 		setVisible(true);
 		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -36,15 +40,19 @@ public class MainView extends JFrame {
 	
 	public void setCenter(JPanel center) {
 		this.center.removeAll();
-		this.center.add(center);
-		center.setBackground(ViewUtilities.BACKGROUND_BLUE);
-		validate();
-		pack();
+		if(center != null) {
+			this.center.add(center);
+			center.setBackground(ViewUtilities.BACKGROUND_BLUE);
+			validate();
+			pack();
+		}
 	}
 	
 	public void setRight(JPanel right) {
-		this.right = right;
-		getContentPane().add(right, BorderLayout.LINE_END);
+		this.right.removeAll();
+		this.right.add(right, BorderLayout.LINE_END);
 		left.setBackground(ViewUtilities.BACKGROUND_BLUE);
+		validate();
+		pack();
 	}
 }

@@ -1,6 +1,8 @@
 package dk.souldriven.priority.program;
 
 import dk.souldriven.priority.controllers.MainViewController;
+import dk.souldriven.priority.entities.Entry;
+import dk.souldriven.priority.entities.PriorityEnum;
 import dk.souldriven.priority.entities.PriorityList;
 import dk.souldriven.priority.view.MainView;
 
@@ -18,8 +20,11 @@ public class Program {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		PriorityList list = new PriorityList();
+		SavedEntriesLoader SEL = new SavedEntriesLoader();
+		PriorityList list = new PriorityList(SEL);
+
+
+		Entry entry = new Entry("Name", "Description", 0,PriorityEnum.CRITICAL);
 		MainViewController mainViewController = new MainViewController(list);
 		
 	}

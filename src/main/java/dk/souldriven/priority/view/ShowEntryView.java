@@ -8,9 +8,19 @@ import java.awt.*;
 import static javax.swing.BoxLayout.X_AXIS;
 
 public class ShowEntryView extends BasicEntryView {
-	
+
+	public Entry getEntry() {
+		return entry;
+	}
+
 	private Entry entry;
 	private JButton saveChangesBtn;
+
+	public JButton getCreateSubtask() {
+		return createSubtask;
+	}
+
+	private JButton createSubtask;
 	private final String EDIT = "Edit priority";
 	private final String SAVE = " Save changes";
 	private boolean isEditMode = false;
@@ -27,6 +37,8 @@ public class ShowEntryView extends BasicEntryView {
 	
 	public ShowEntryView(Entry entry, Dimension size) {
 		super(size);
+		
+		createSubtask = new JButton("Add subtask");
 		this.entry = entry;
 		titlePanel = new JPanel();
 		titlePanel.setLayout(new BoxLayout(titlePanel, X_AXIS));
@@ -102,9 +114,12 @@ public class ShowEntryView extends BasicEntryView {
 	protected void createBottomPanel() {
 		super.createBottomPanel();
 		saveChangesBtn = new JButton("Edit");
+		createSubtask.setAlignmentX(0.75f);
 		saveChangesBtn.setAlignmentX(0.75f);
 		bottomPanel.add(Box.createHorizontalGlue());
 		bottomPanel.add(Box.createHorizontalGlue());
+		bottomPanel.add(createSubtask);
+		bottomPanel.add(Box.createRigidArea(new Dimension(25,0)));
 		bottomPanel.add(saveChangesBtn);
 		bottomPanel.add(Box.createHorizontalGlue());
 		bottomPanel.validate();

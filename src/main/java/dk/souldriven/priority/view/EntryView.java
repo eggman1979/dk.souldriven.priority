@@ -21,7 +21,7 @@ public class EntryView extends JPanel implements Runnable {
 		setOpaque(false);
 		entryList = new JList<>();
 		entryList.setName(name);
-		entryList.addFocusListener(new ListFocusListener(entryList));
+//		entryList.addFocusListener(new ListFocusListener(entryList));
 		ListCellRenderer cellRenderer = new ListCellRenderer();
 		entryList.setCellRenderer(cellRenderer);
 	
@@ -38,6 +38,7 @@ public class EntryView extends JPanel implements Runnable {
 		scrollPane.setOpaque(true);
 		entryList.setFixedCellHeight(30);
 		super.add(scrollPane);
+		run();
 	
 	}
 	
@@ -46,8 +47,12 @@ public class EntryView extends JPanel implements Runnable {
 		super.removeAll();
 		DefaultListModel<String> listModel = new DefaultListModel<>();
 		for (Entry entry : todo) {
-			System.out.println("running run(), there are " +todo.size() + " entries in " + getName() );
-			listModel.addElement(entry.getName());
+			System.out.println("running run(), there are " + todo.size() + " entries in " + entryList.getName() );
+			String parentName = "";
+			if(entry.getParenttask() != null) {
+				parentName = " (" +entry.getParenttask().getName() +") ";
+			}
+			listModel.addElement(entry.getName() +  parentName);
 		}
 		entryList.setModel(listModel);
 		super.add(scrollPane);
