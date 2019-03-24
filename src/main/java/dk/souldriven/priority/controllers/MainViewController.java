@@ -45,11 +45,11 @@ public class MainViewController {
 	public MainViewController(PriorityList list) {
 		this.list = list;
 		view = new MainView();
-		todo = new EntryView(list.getTodoList(), "todo");
+		todo = new EntryView(list.getTodoList(), "todo", list);
 		MouseListener entrySelectionListener = new EntryListSelectListener(this);
 		todo.getEntryList().addMouseListener(entrySelectionListener);
 		todo.getEntryList().addFocusListener(new ListFocusListener(todo.getEntryList(), this));
-		done = new EntryView(list.getDoneList(), "done");
+		done = new EntryView(list.getDoneList(), "done", list);
 		done.getEntryList().addMouseListener(entrySelectionListener);
 		done.getEntryList().addFocusListener(new ListFocusListener(done.getEntryList(), this));
 		list.observers.add(todo);
@@ -75,7 +75,7 @@ public class MainViewController {
 		createEntryView.getCreateButton().addActionListener(new SavePriorityBtnListener(list, this));
 		createEntryView.getCreateSubtask().addActionListener(new AddSubtaskListener(this, createEntryView));
 		setCenterView(createEntryView);
-		setRightView(new SubtaskPanelView(new Entry(), new EntryView(new ArrayList<>(), "Subtask")));
+		setRightView(new SubtaskPanelView(new Entry(), new EntryView(new ArrayList<>(), "Subtask", list)));
 	}
 	
 	public BasicEntryView getCreateEntryView() {
@@ -110,7 +110,7 @@ public class MainViewController {
 			}
 		}
 		if (entry != null) {
-			subTasks = new EntryView(entry.getDependencies(), "Subtasks");
+			subTasks = new EntryView(entry.getDependencies(), "Subtasks", list);
 			subTasks.run();
 			SubtaskPanelView subtaskPanel = new SubtaskPanelView(entry, subTasks);
 			setRightView(subtaskPanel);

@@ -21,4 +21,10 @@ public class ViewUtilities {
 		Border leftBorder = BorderFactory.createMatteBorder(0,0,0,1, Color.BLACK);
 		comp.setBorder(new CompoundBorder(border, leftBorder));
 	}
+
+	public static void createBottomBorder(JComponent comp) {
+		Border border =  comp.getBorder();
+		Border bottomBorder = BorderFactory.createLineBorder(Color.black);
+		comp.setBorder(new CompoundBorder(border, bottomBorder));
+	}
 }

@@ -3,6 +3,8 @@ package dk.souldriven.priority.view;
 import dk.souldriven.priority.controllers.listeners.ListFocusListener;
 import dk.souldriven.priority.entities.Entry;
 import dk.souldriven.priority.controllers.listeners.ListCellRenderer;
+import dk.souldriven.priority.entities.PriorityList;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -12,17 +14,18 @@ public class EntryView extends JPanel implements Runnable {
 	private JList<String> entryList;
 	private ListSelectionModel selectModel;
 	private int selectedEvent = -1;
+	PriorityList pList;
 	JScrollPane scrollPane;
 	List<Entry> todo;
 	
-	public EntryView(List<Entry> todo, String name) {
+	public EntryView(List<Entry> todo, String name, PriorityList pList) {
 		setPreferredSize(new Dimension(ViewConstants.MIN_WIDTH_LEFT, (ViewConstants.MIN_HEIGHT/3)-100));
 		this.todo = todo;
 		setOpaque(false);
 		entryList = new JList<>();
 		entryList.setName(name);
 //		entryList.addFocusListener(new ListFocusListener(entryList));
-		ListCellRenderer cellRenderer = new ListCellRenderer();
+		ListCellRenderer cellRenderer = new ListCellRenderer(todo);
 		entryList.setCellRenderer(cellRenderer);
 	
 		setBackground(ViewUtilities.BACKGROUND_BLUE);

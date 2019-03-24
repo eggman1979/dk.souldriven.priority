@@ -46,7 +46,7 @@ public class SavedEntriesLoader implements IEntryDAO {
 							}
 						}
 					}
-					entry.setIsClosed(listName == "todo" ? false : true);
+					entry.setIsClosed(listName != "todo");
 					entry.setId(Integer.parseInt(entryString[0]));
 					list.add(entry);
 				}

@@ -55,7 +55,7 @@ public class ShowEntryView extends BasicEntryView {
 		titlePanel.add(Box.createHorizontalGlue());
 		String parentText = "";
 		if (entry.getParenttask() != null) {
-			parentText = "Parent priority: " + entry.getName();
+			parentText = "Parent priority: " + entry.getParenttask().getName();
 		}
 		label.setText(parentText);
 		
@@ -72,6 +72,7 @@ public class ShowEntryView extends BasicEntryView {
 		//titleTextField.setBorder(null);
 		entryTitleLabel.setText("Priority name:");
 		priorityDropdown.setVisible(false);
+		priorityDropdown.setSelectedIndex(entry.getPriorityEnum().getIndex());
 		label = new JLabel(entry.getPriorityEnum().getName());
 		label.setForeground(Color.WHITE);
 		topPanel.add(label);

@@ -1,38 +1,34 @@
 package dk.souldriven.priority.controllers.listeners;
 
+import dk.souldriven.priority.controllers.MainViewController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class ListFocusListener implements FocusListener {
-	
-	private JList entryList;
-	
-	
-	public ListFocusListener(JList entryList) {
-		this.entryList = entryList;
-	}
-	
-	@Override
-	public void focusGained(FocusEvent e) {
-	
-	}
-	
-	@Override
-	public void focusLost(FocusEvent e) {
-//		System.out.println(e.getOppositeComponent());
-//		Component component = e.getOppositeComponent();
-//		if (component instanceof JButton) {
-//			JButton button = ((JButton) component);
-//			if (button.getText().contains("Edit") || button.getText().contains("Save")) {
-//				return;
-//			} else {
-//				entryList.clearSelection();
-//			}
-//		}
-//		else{
-//			entryList.clearSelection();
-//		}
-	}
+
+    private JList entryList;
+    private MainViewController mvc;
+
+    public ListFocusListener(JList entryList, MainViewController mvc) {
+        this.entryList = entryList;
+        this.mvc = mvc;
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+
+        if (e.getSource() instanceof JList) {
+            mvc.setFocusList((JList) e.getSource());
+        }
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+
+    }
+
+
 }
